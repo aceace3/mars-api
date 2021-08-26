@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入 layui.css -->
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <!-- 引入 layui.js -->
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <!-- 引入 jquery-3.1.1.min.js -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+<div th:text="${test1}"></div>
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md2">
+            <div style="height: 50px;background-color: azure"></div>
+            <div id="test1" class="demo-tree demo-tree-box"></div>
+        </div>
+        <div class="layui-col-md10">
+            <div style="height: 50px"></div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md2"></div>
+                <div class="layui-col-md8">
+                    <div id="dataBox"></div>
+                </div>
+                <div class="layui-col-md2"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    layui.use(['tree', 'util'], function() {
+        var tree = layui.tree
+            , layer = layui.layer
+            , util = layui.util
+
+        window.onload=function() {
+            $.ajax({
+                url:"/sysApi/getSysApi",
+                type:"get",
+                data:{
+
+                },
+                success:function (data) {
+                    tree.render({
+                        elem: '#test1' //默认是点击节点可进行收缩
+                        , data: data
+                        ,click: function(obj){
+                            var data = obj.data;  //获取当前点击的节点数据
+                            if (data.isLeaf == 1){
+                               // layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+                                $.ajax({
+                                    url: "/sysApi/selectById",
+                                    type: "get",
+                                    data: {
+                                        "id": data.id
+                                    },
+                                    success:function (data) {
+                                        $('#dataBox').empty()
+                                        var html = `<h1 style="margin-bottom: 15px">${data.title}</h1>
+                                                    <h5>作者：${data.createName}</h5>
+                                                    <hr class="layui-border-blue">
+                                                    <span>${data.content}</span>
+
+
+
+
+                                                       `
+                                        $('#dataBox').append(html)
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+
+            })
+        }
+
+    })
+</script>
+</html>

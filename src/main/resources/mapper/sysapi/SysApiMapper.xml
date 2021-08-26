@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.mars_api.sysapi.mapper.SysApiMapper">
+
+    <select id="getSysApi" resultType="com.mars.mars_api.sysapi.bean.SysApi">
+        SELECT * FROM sys_api
+    </select>
+
+    <select id="selectById" resultType="com.mars.mars_api.sysapi.bean.dto.SysApiDTO">
+        SELECT s.*, u.name AS createName FROM sys_api s
+        LEFT JOIN users u ON u.id = s.create_by
+        WHERE s.id = #{id}
+    </select>
+
+</mapper>

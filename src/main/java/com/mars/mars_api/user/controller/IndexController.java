@@ -1,6 +1,7 @@
 package com.mars.mars_api.user.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -25,9 +26,14 @@ public class IndexController {
     }
 
     @RequestMapping ("/test")
-    public String test(){
+    public String test(Model model){
+        model.addAttribute("testname","zhaoyi");
         return "test";
     }
 
+    @RequestMapping ("/mainPage")
+    public String mainPage(){
+        return "main";
+    }
 
 }

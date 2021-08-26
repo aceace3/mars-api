@@ -11,12 +11,16 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ *
+ * 登录判断拦截器
+ *
+ * */
 @WebFilter(filterName = "sessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
 
     /** 不需要过滤的URL */
-    private String[] filterExclusionUrls = { "/login", "/index" };
+    private String[] filterExclusionUrls = { "/user/login", "/index" };
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -28,9 +32,7 @@ public class SessionFilter implements Filter {
 
         String url = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-        System.out.println("inininininin");
         if (isFliter(url)) {
-            System.out.println(session.getAttribute("users"));
             // session内容check
             if (session.getAttribute("users") != null) {
                 chain.doFilter(request, response);

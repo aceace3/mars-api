@@ -75,11 +75,16 @@
                                     success:function (data) {
                                         $('#dataBox').empty()
                                         var html = `<h1 style="margin-bottom: 15px">${data.title}</h1>
-                                                    <h5>作者：${data.createName}</h5><h5 style="float: right;margin-right: 20px">创建时间：${data.createTime}</h5>
+                                                    <h5 style="color: grey">作者：${data.createName}</h5>
+                                                    <h5 style="float: right;margin-right: 20px;color: grey">创建时间：${data.createTime}</h5>
                                                     <hr class="layui-border-blue">
-                                                    <span>${data.content}</span>
+                                                    <span id="sp">${data.content}</span>
                                                        `
                                         $('#dataBox').append(html)
+
+                                        $("#sp").find('table').attr("class","layui-table");
+                                        $("#sp").find('li').attr("class","layui-elem-quote layui-quote-nm");
+
                                     }
                                 })
                             }
@@ -89,6 +94,7 @@
 
             })
         }
+
 
     })
 </script>

@@ -149,6 +149,7 @@
 
         var dataDicHtml = `
 
+
 -  用户表，储存用户信息
 
 |字段|类型|空|默认|注释|
@@ -160,6 +161,9 @@
 |reg_time |int(11)     |否   | 0  |   注册时间  |
 
 - 备注：无
+
+
+欢迎使用ShowDoc！
         `
 
         $("#insertApi").click(function (){
@@ -169,14 +173,13 @@
         $("#insertDataDic").click(function (){
             editor.setMarkdown(dataDicHtml)
         })
-    });
     layui.use('form', function() {
         var form = layui.form;
         //保存
         form.on('submit(formDemo)', function (data) {
             var title = data.field.title
             var pid = $("#treeData").val()
-            var content = $(".markdown-body.editormd-preview-container").html()
+            var content =  editor.getHTML()
 
             $.ajax({
                 url:"/sysApi/saveSysApi",
@@ -195,6 +198,7 @@
 
             return false;
         });
+    });
 
         //返回
         $("#returnBtn").click(function () {

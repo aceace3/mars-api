@@ -10,7 +10,10 @@ import java.util.List;
 @Mapper
 public interface SysApiMapper {
 
-    List<SysApi> getSysApi();
+    List<SysApi> getSysApi(@Param("isLeaf")Integer isLeaf);
 
     SysApiDTO selectById(@Param("id")Integer id);
+
+    Integer saveSysApi(SysApi sysApi);
+
 }

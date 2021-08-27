@@ -11,7 +11,7 @@ public class SysApi {
 
     private String title;
 
-    private String createBy;
+    private Integer createBy;
 
     private String content;
 

@@ -11,7 +11,7 @@ public class SysApiDTO {
 
     private String title;
 
-    private String createBy;
+    private Integer createBy;
 
     private String content;
 

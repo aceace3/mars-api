@@ -1,15 +1,15 @@
 package com.mars.mars_api.sysapi.controller;
 
+import com.mars.mars_api.sysapi.bean.SysApi;
+import com.mars.mars_api.sysapi.bean.dto.DirDTO;
 import com.mars.mars_api.sysapi.bean.dto.SysApiDTO;
 import com.mars.mars_api.sysapi.service.SysApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -39,5 +39,23 @@ public class SysApiController {
             return sysApiDTO;
         }
         return null;
+    }
+
+    /**
+     * 下拉目录
+     * */
+    @ResponseBody
+    @GetMapping("/getSelectDir")
+    public List<DirDTO> getDir(){
+        return sysApiService.getDir(0);
+    }
+
+    /**
+     * 保存数据
+     * */
+    @ResponseBody
+    @PostMapping("/saveSysApi")
+    public String saveSysApi(@RequestBody SysApi sysApi, HttpServletRequest request){
+        return sysApiService.saveSysApi(sysApi, request);
     }
 }

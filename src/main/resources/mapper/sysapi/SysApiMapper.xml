@@ -3,7 +3,12 @@
 <mapper namespace="com.mars.mars_api.sysapi.mapper.SysApiMapper">
 
     <select id="getSysApi" resultType="com.mars.mars_api.sysapi.bean.SysApi">
-        SELECT * FROM sys_api
+        SELECT * FROM sys_api s
+        <where>
+            <if test="isLeaf != null">
+                s.is_leaf = #{isLeaf}
+            </if>
+        </where>
     </select>
 
     <select id="selectById" resultType="com.mars.mars_api.sysapi.bean.dto.SysApiDTO">
@@ -11,5 +16,10 @@
         LEFT JOIN users u ON u.id = s.create_by
         WHERE s.id = #{id}
     </select>
+
+    <insert id="saveSysApi" parameterType="com.mars.mars_api.sysapi.bean.SysApi">
+        INSERT INTO sys_api(title, create_by, content, pid, create_time, is_leaf)
+        VALUES (#{title}, #{createBy}, #{content}, #{pid}, #{createTime}, #{isLeaf})
+    </insert>
 
 </mapper>

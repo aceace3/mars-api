@@ -1,5 +1,6 @@
 package com.mars.mars_api.user.controller;
 
+import com.mars.mars_api.user.bean.User;
 import com.mars.mars_api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,9 @@ public class UserController {
                         @RequestParam("password") String password,
                         HttpServletRequest request,
                         HttpServletResponse response){
-        Boolean isLogin = userService.login(username, password);
-        if (isLogin){
-            request.getSession().setAttribute("users", username);
+        User u = userService.login(username, password);
+        if (u != null){
+            request.getSession().setAttribute("users", u);
             return "ojbk";
         }
         return "notOjbk";

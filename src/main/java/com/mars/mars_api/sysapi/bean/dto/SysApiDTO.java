@@ -19,13 +19,7 @@ public class SysApiDTO {
 
     private Date createTime;
 
-    private String type;
-
-    private String url;
-
     private Integer isLeaf;
-
-    private String path;
 
     private List<SysApiDTO> children;
 

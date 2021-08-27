@@ -32,8 +32,8 @@ public class TreeUtils {
         // 将所有顶级菜单从 "待用菜单列表" 中删除
         all.removeAll(roots);
 
-        for (SysApiDTO SysApiDTO : roots) {
-            SysApiDTO.setChildren(getCurrentNodeChildren(SysApiDTO));;
+        for (SysApiDTO sysApiDTO : roots) {
+            sysApiDTO.setChildren(getCurrentNodeChildren(sysApiDTO));;
         }
         return roots;
     }

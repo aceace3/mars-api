@@ -17,7 +17,16 @@
 
     <div class="layui-row layui-col-space10">
         <div class="layui-col-md2">
-            <div style="height: 50px;background-color: azure"></div>
+            <div style="height: 50px;background-color: #d7ecdc">
+                <div class="layui-btn-group" style="float: right;margin-top: 20px;">
+                    <button type="button" class="layui-btn layui-btn-sm" id="addApiBtn">
+                        <i class="layui-icon">&#xe654;</i>新建Api
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-sm" id="manageDicBtn">
+                        <i class="layui-icon">&#xe642;</i>管理目录
+                    </button>
+                </div>
+            </div>
             <div id="test1" class="demo-tree demo-tree-box"></div>
         </div>
         <div class="layui-col-md10">
@@ -37,6 +46,10 @@
         var tree = layui.tree
             , layer = layui.layer
             , util = layui.util
+
+        $('#addApiBtn').click(function () {
+            location.href = "/addApi"
+        })
 
         window.onload=function() {
             $.ajax({
@@ -62,13 +75,9 @@
                                     success:function (data) {
                                         $('#dataBox').empty()
                                         var html = `<h1 style="margin-bottom: 15px">${data.title}</h1>
-                                                    <h5>作者：${data.createName}</h5>
+                                                    <h5>作者：${data.createName}</h5><h5 style="float: right;margin-right: 20px">创建时间：${data.createTime}</h5>
                                                     <hr class="layui-border-blue">
                                                     <span>${data.content}</span>
-
-
-
-
                                                        `
                                         $('#dataBox').append(html)
                                     }

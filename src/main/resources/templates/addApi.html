@@ -176,7 +176,7 @@
         form.on('submit(formDemo)', function (data) {
             var title = data.field.title
             var pid = $("#treeData").val()
-            var content = $("#contentArea").html()
+            var content = $(".markdown-body.editormd-preview-container").html()
 
             $.ajax({
                 url:"/sysApi/saveSysApi",

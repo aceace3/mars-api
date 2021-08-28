@@ -3,7 +3,7 @@
 <mapper namespace="com.mars.mars_api.user.mapper.UserMapper">
 
     <select id="getUserByNameNdPassword" resultType="com.mars.mars_api.user.bean.User">
-        SELECT *
+        SELECT id, name AS userName, password
         FROM users
         WHERE name = #{username} AND password = #{password}
     </select>

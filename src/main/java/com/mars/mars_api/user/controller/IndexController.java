@@ -1,8 +1,12 @@
 package com.mars.mars_api.user.controller;
 
+import com.mars.mars_api.user.bean.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
@@ -32,7 +36,10 @@ public class IndexController {
     }
 
     @RequestMapping ("/mainPage")
-    public String mainPage(){
+    public String mainPage(Model model, HttpSession session){
+        User u = (User) session.getAttribute("users");
+        System.out.println(u);
+        model.addAttribute("username", u.getUserName());
         return "main";
     }
 

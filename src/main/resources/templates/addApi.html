@@ -143,12 +143,12 @@
 
  **备注**
 
-- 更多返回错误代码请看首页的错误代码描述
 
     `
 
         var dataDicHtml = `
 
+**简要描述：**
 
 -  用户表，储存用户信息
 
@@ -160,10 +160,11 @@
 |name     |varchar(15) |是   |    |    昵称     |
 |reg_time |int(11)     |否   | 0  |   注册时间  |
 
-- 备注：无
+**备注：**
+
+-  无
 
 
-欢迎使用ShowDoc！
         `
 
         $("#insertApi").click(function (){
@@ -192,7 +193,6 @@
                 }),
                 success:function (data) {
                     layer.msg(JSON.stringify(data));
-
                 }
             })
 

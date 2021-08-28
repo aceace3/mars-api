@@ -4,13 +4,12 @@ import com.mars.mars_api.user.bean.User;
 import com.mars.mars_api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -21,15 +20,27 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(@RequestParam("username") String username,
-                        @RequestParam("password") String password,
-                        HttpServletRequest request,
-                        HttpServletResponse response){
-        User u = userService.login(username, password);
+    public Map<String, String> login(@RequestParam("userName") String userName,
+                                     @RequestParam("password") String password,
+                                     HttpServletRequest request,
+                                     HttpServletResponse response){
+        User u = userService.login(userName, password);
+        Map<String, String> result = new HashMap<>();
         if (u != null){
             request.getSession().setAttribute("users", u);
-            return "ojbk";
+            request.getSession().setMaxInactiveInterval(-1); //永不过期
+
+            result.put("status", "ojbk");
+            return result;
         }
-        return "notOjbk";
+        result.put("status", "notOjbk");
+        return result;
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public void logout(HttpServletRequest request, HttpServletResponse response){
+        User u = (User) request.getSession().getAttribute("users");
+        request.getSession().removeAttribute("users");
     }
 }

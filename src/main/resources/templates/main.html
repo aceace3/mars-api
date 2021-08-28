@@ -83,21 +83,23 @@
                                     },
                                     success:function (data) {
                                         $('#dataBox').empty()
-                                        var html = `<h1 style="margin-bottom: 15px">${data.title}</h1>
+                                        var html = `<h1 style="margin-bottom: 10px;text-align: center;">${data.title}</h1>
                                                     <div style="float: right;color: grey;margin-right: 20px;">
                                                         <h5>创建者：${data.createName}</h5>
                                                         <h5>创建时间：${data.createTime}</h5>
                                                     </div>
-                                                    <hr class="layui-border-blue"><br>
+                                                    <div style="width: 100%;height: 15px;background-color: #F2F5F7;margin: 10px 0;clear: both;"></div>
                                                     <span id="sp">${data.content}</span>
                                                        `
                                         $('#dataBox').append(html)
 
                                         $("#sp").find('table').attr("class","layui-table");
+                                        $("#sp").find('table').attr("style","margin:20px 15px;");
                                         $("#sp").find('li').attr("style","margin-top:3px;padding:15px 20px;");
                                         $("#sp").find('pre').attr("class","layui-code layui-box layui-code-view");
+                                        $("#sp").find('pre').attr("style","margin:20px 15px;");
                                         $("#sp").find('code').attr("class","layui-code-ol");
-                                        $("#sp").find('code').attr("style","color:green;font-size:14px;");
+                                        $("#sp").find('code').attr("style","color:green;font-size:16px;");
                                     }
                                 })
                             }

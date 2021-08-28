@@ -174,31 +174,34 @@
         $("#insertDataDic").click(function (){
             editor.setMarkdown(dataDicHtml)
         })
-    layui.use('form', function() {
-        var form = layui.form;
-        //保存
-        form.on('submit(formDemo)', function (data) {
-            var title = data.field.title
-            var pid = $("#treeData").val()
-            var content =  editor.getHTML()
 
-            $.ajax({
-                url:"/sysApi/saveSysApi",
-                type:"post",
-                contentType: 'application/json',
-                data:JSON.stringify({
-                    "title" : title,
-                    "pid" : pid,
-                    "content" : content
-                }),
-                success:function (data) {
-                    layer.msg(JSON.stringify(data));
-                }
-            })
+        layui.use('form', function() {
+            var form = layui.form;
+            //保存
+            form.on('submit(formDemo)', function (data) {
+                var title = data.field.title
+                var pid = $("#treeData").val()
+                var content =  editor.getHTML()
+                var ogContent = $("#contentArea").val()
 
-            return false;
+                $.ajax({
+                    url:"/sysApi/saveSysApi",
+                    type:"post",
+                    contentType: 'application/json',
+                    data:JSON.stringify({
+                        "title" : title,
+                        "pid" : pid,
+                        "content" : content,
+                        "ogContent" : ogContent
+                    }),
+                    success:function (data) {
+                        location.href = "/mainPage"
+                    }
+                })
+
+                return false;
+            });
         });
-    });
 
         //返回
         $("#returnBtn").click(function () {

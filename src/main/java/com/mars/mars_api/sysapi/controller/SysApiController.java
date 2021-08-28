@@ -58,4 +58,22 @@ public class SysApiController {
     public String saveSysApi(@RequestBody SysApi sysApi, HttpServletRequest request){
         return sysApiService.saveSysApi(sysApi, request);
     }
+
+    /**
+     * 删除数据
+     * */
+    @ResponseBody
+    @GetMapping("/delSysApi")
+    public String delSysApi(@RequestParam("id") Integer id){
+        return sysApiService.delSysApi(id);
+    }
+
+    /**
+     * 根据id 查询数据
+     * */
+    @ResponseBody
+    @GetMapping("/getApiById")
+    public SysApi getApiById(@RequestParam("id") Integer id){
+        return sysApiService.getApiById(id);
+    }
 }

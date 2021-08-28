@@ -38,7 +38,6 @@ public class IndexController {
     @RequestMapping ("/mainPage")
     public String mainPage(Model model, HttpSession session){
         User u = (User) session.getAttribute("users");
-        System.out.println(u);
         model.addAttribute("username", u.getUserName());
         return "main";
     }

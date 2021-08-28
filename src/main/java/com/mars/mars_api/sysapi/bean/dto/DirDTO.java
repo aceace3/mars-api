@@ -10,5 +10,7 @@ public class DirDTO {
     private Integer pid;
     private String name;
     private Boolean open;
+    private String pname;
+    private String ogContent;
     private List<DirDTO> children;
 }

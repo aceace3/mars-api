@@ -3,10 +3,14 @@
 <mapper namespace="com.mars.mars_api.sysapi.mapper.SysApiMapper">
 
     <select id="getSysApi" resultType="com.mars.mars_api.sysapi.bean.SysApi">
-        SELECT * FROM sys_api s
+        SELECT s.*, s2.title AS pname FROM sys_api s
+            LEFT JOIN sys_api s2 ON s.pid = s2.id
         <where>
             <if test="isLeaf != null">
                 s.is_leaf = #{isLeaf}
+            </if>
+            <if test="id != null">
+                AND s.id = #{id}
             </if>
         </where>
     </select>
@@ -18,8 +22,13 @@
     </select>
 
     <insert id="saveSysApi" parameterType="com.mars.mars_api.sysapi.bean.SysApi">
-        INSERT INTO sys_api(title, create_by, content, pid, create_time, is_leaf)
-        VALUES (#{title}, #{createBy}, #{content}, #{pid}, #{createTime}, #{isLeaf})
+        INSERT INTO sys_api(title, create_by, content, pid, create_time, is_leaf, og_content)
+        VALUES (#{title}, #{createBy}, #{content}, #{pid}, #{createTime}, #{isLeaf}, #{ogContent})
     </insert>
+
+    <delete id="delSysApi" parameterType="java.lang.Integer">
+        DELETE FROM sys_api
+        WHERE id = #{id}
+    </delete>
 
 </mapper>

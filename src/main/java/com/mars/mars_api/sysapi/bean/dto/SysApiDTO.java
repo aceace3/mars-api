@@ -24,4 +24,8 @@ public class SysApiDTO {
     private List<SysApiDTO> children;
 
     private String createName;
+
+    private String pname;
+
+    private String ogContent;
 }

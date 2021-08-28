@@ -21,4 +21,7 @@ public class SysApi {
 
     private Integer isLeaf;
 
+    private String pname;
+
+    private String ogContent;
 }

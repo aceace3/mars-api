@@ -61,6 +61,37 @@
         })
 
         window.onload=function() {
+
+            window.delFunc = function(id) {
+                if (confirm("确认要删除？")) {
+                    $.ajax({
+                        url:"/sysApi/delSysApi",
+                        type:"get",
+                        data:{
+                            "id":id
+                        },
+                        success:function (data) {
+                            location.reload();
+                        }
+
+                    })
+                }
+            }
+
+            window.editFunc = function(id) {
+                location.href = "/editSysApiPage?id="+id
+                // $.ajax({
+                //     url:"/editSysApiPage",
+                //     type:"get",
+                //     data:{
+                //         "id":id
+                //     },
+                //     success:function (data) {
+                //     }
+                //
+                // })
+            }
+
             $.ajax({
                 url:"/sysApi/getSysApi",
                 type:"get",
@@ -83,13 +114,24 @@
                                     },
                                     success:function (data) {
                                         $('#dataBox').empty()
-                                        var html = `<h1 style="margin-bottom: 10px;text-align: center;">${data.title}</h1>
+                                        var html = `<h1 style="margin-bottom: 10px;text-align: center;"><b>${data.title}</b></h1>
                                                     <div style="float: right;color: grey;margin-right: 20px;">
                                                         <h5>创建者：${data.createName}</h5>
                                                         <h5>创建时间：${data.createTime}</h5>
                                                     </div>
                                                     <div style="width: 100%;height: 15px;background-color: #F2F5F7;margin: 10px 0;clear: both;"></div>
                                                     <span id="sp">${data.content}</span>
+                                                    <div style="position: absolute;right: -100px;top: 100px;width: 50px;height: 160px;">
+                                                        <div id="editBtn" onclick="editFunc(${data.id})" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;border-bottom: 1px solid green;border-radius:25px;">
+                                                            <span>编辑</span>
+                                                        </div>
+                                                        <div id="copyBtn" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;border-bottom: 1px solid green;border-radius:25px;">
+                                                            <span>复制</span>
+                                                        </div>
+                                                        <div id="delBtn" onclick="delFunc(${data.id})" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;margin-top: 8px;border-bottom: 1px solid green;border-radius:25px;">
+                                                            <span style="color: #df0d00;">删除</span>
+                                                        </div>
+                                                    </div>
                                                        `
                                         $('#dataBox').append(html)
 
@@ -123,6 +165,11 @@
 
             })
         })
+
+
+
     })
+
+
 </script>
 </html>

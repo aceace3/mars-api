@@ -25,7 +25,7 @@ public class SysApiService {
 
     public List<SysApiDTO> getSysApi(){
         //全部数据
-        List<SysApi> sysApiList = sysApiMapper.getSysApi(null);
+        List<SysApi> sysApiList = sysApiMapper.getSysApi(null, null);
 
         //转格式
         List<SysApiDTO> dtoList = new ArrayList<>();
@@ -46,7 +46,7 @@ public class SysApiService {
 
     public List<DirDTO> getDir(Integer isLeaf){
         //全部数据
-        List<SysApi> sysApiList = sysApiMapper.getSysApi(isLeaf);
+        List<SysApi> sysApiList = sysApiMapper.getSysApi(isLeaf, null);
 
         System.out.println(sysApiList);
 
@@ -79,5 +79,16 @@ public class SysApiService {
             return "保存成功";
         }
         return "保存失败";
+    }
+
+    public String delSysApi(Integer id){
+        if (sysApiMapper.delSysApi(id) > 0){
+            return "删除成功";
+        }
+        return "删除失败";
+    }
+
+    public SysApi getApiById(Integer id){
+        return sysApiMapper.getSysApi(null, id).get(0);
     }
 }

@@ -195,7 +195,8 @@
                         "ogContent" : ogContent
                     }),
                     success:function (data) {
-                        location.href = "/mainPage"
+                        layer.msg(JSON.stringify(data));
+                        setTimeout(function(){ location.href = "/mainPage" }, 1000);
                     }
                 })
 

@@ -31,4 +31,8 @@
         WHERE id = #{id}
     </delete>
 
+    <update id="editSysApi" parameterType="com.mars.mars_api.sysapi.bean.SysApi">
+        UPDATE sys_api SET title = #{title}, content = #{content}, pid = #{pid}, create_time = #{createTime}, og_content = #{ogContent} WHERE id = #{id}
+    </update>
+
 </mapper>

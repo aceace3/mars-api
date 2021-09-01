@@ -80,16 +80,10 @@
 
             window.editFunc = function(id) {
                 location.href = "/editSysApiPage?id="+id
-                // $.ajax({
-                //     url:"/editSysApiPage",
-                //     type:"get",
-                //     data:{
-                //         "id":id
-                //     },
-                //     success:function (data) {
-                //     }
-                //
-                // })
+            }
+
+            window.copyFunc = function(id) {
+                location.href = "/copySysApiPage?id="+id
             }
 
             $.ajax({
@@ -125,7 +119,7 @@
                                                         <div id="editBtn" onclick="editFunc(${data.id})" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;border-bottom: 1px solid green;border-radius:25px;">
                                                             <span>编辑</span>
                                                         </div>
-                                                        <div id="copyBtn" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;border-bottom: 1px solid green;border-radius:25px;">
+                                                        <div id="copyBtn" onclick="copyFunc(${data.id})" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;border-bottom: 1px solid green;border-radius:25px;">
                                                             <span>复制</span>
                                                         </div>
                                                         <div id="delBtn" onclick="delFunc(${data.id})" style="width: 50px;height: 50px;cursor: pointer;line-height: 50px;text-align: center;background-color: #EDFCED;margin-top: 8px;border-bottom: 1px solid green;border-radius:25px;">

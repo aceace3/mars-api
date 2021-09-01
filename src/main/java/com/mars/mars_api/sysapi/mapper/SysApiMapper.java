@@ -17,4 +17,6 @@ public interface SysApiMapper {
     Integer saveSysApi(SysApi sysApi);
 
     Integer delSysApi(@Param("id") Integer id);
+
+    Integer editSysApi(SysApi sysApi);
 }

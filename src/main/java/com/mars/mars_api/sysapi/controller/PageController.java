@@ -18,4 +18,9 @@ public class PageController {
         return "editSysApiPage";
     }
 
+    @RequestMapping("/copySysApiPage")
+    public String copySysApiPage(){
+        return "copySysApiPage";
+    }
+
 }

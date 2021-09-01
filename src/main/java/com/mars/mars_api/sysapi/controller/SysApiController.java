@@ -64,8 +64,8 @@ public class SysApiController {
      * */
     @ResponseBody
     @GetMapping("/delSysApi")
-    public String delSysApi(@RequestParam("id") Integer id){
-        return sysApiService.delSysApi(id);
+    public String delSysApi(@RequestParam("id") Integer id, HttpServletRequest request){
+        return sysApiService.delSysApi(id, request);
     }
 
     /**
@@ -76,4 +76,14 @@ public class SysApiController {
     public SysApi getApiById(@RequestParam("id") Integer id){
         return sysApiService.getApiById(id);
     }
+
+    /**
+     * 编辑数据
+     * */
+    @ResponseBody
+    @PostMapping("/editSysApi")
+    public String editSysApi(@RequestBody SysApi sysApi, HttpServletRequest request){
+        return sysApiService.editSysApi(sysApi, request);
+    }
+
 }

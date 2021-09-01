@@ -1,5 +1,8 @@
 package com.mars.mars_api.sysapi.service;
 
+import com.mars.mars_api.history.bean.SysHistory;
+import com.mars.mars_api.history.mapper.SysHistoryMapper;
+import com.mars.mars_api.history.service.SysHistoryService;
 import com.mars.mars_api.sysapi.bean.SysApi;
 import com.mars.mars_api.sysapi.bean.dto.DirDTO;
 import com.mars.mars_api.sysapi.bean.dto.SysApiDTO;
@@ -22,6 +25,9 @@ public class SysApiService {
 
     @Autowired
     SysApiMapper sysApiMapper;
+
+    @Autowired
+    SysHistoryService sysHistoryService;
 
     public List<SysApiDTO> getSysApi(){
         //全部数据
@@ -81,14 +87,59 @@ public class SysApiService {
         return "保存失败";
     }
 
-    public String delSysApi(Integer id){
-        if (sysApiMapper.delSysApi(id) > 0){
+    public String delSysApi(Integer id, HttpServletRequest request){
+        try {
+            SysHistory history = this.makeHistory(this.getApiById(id), request);
+            sysHistoryService.addHistory(history);
+            sysApiMapper.delSysApi(id);
             return "删除成功";
+
+        }catch (Exception e){
+            System.out.println(e);
+            return "删除失败";
+
         }
-        return "删除失败";
     }
 
     public SysApi getApiById(Integer id){
         return sysApiMapper.getSysApi(null, id).get(0);
+    }
+
+    private SysHistory makeHistory(SysApi sysApi, HttpServletRequest request){
+        User user = (User)request.getSession().getAttribute("users");
+        Integer createBy = user.getId();
+
+        SysHistory history = new SysHistory();
+        history.setApiId(sysApi.getId());
+        history.setTitle(sysApi.getTitle());
+        history.setCreateBy(sysApi.getCreateBy());
+        history.setContent(sysApi.getContent());
+        history.setPid(sysApi.getPid());
+        history.setCreateTime(sysApi.getCreateTime());
+        history.setIsLeaf(sysApi.getIsLeaf());
+        history.setUpdateTime(new Date());
+        history.setUpdateUser(createBy);
+        history.setOgContent(sysApi.getOgContent());
+
+        return history;
+    }
+
+    public String editSysApi(SysApi sysApi, HttpServletRequest request){
+        try {
+            User user = (User)request.getSession().getAttribute("users");
+            Integer createBy = user.getId();
+            sysApi.setCreateBy(createBy);
+            sysApi.setCreateTime(new Date());
+
+            SysHistory history = this.makeHistory(this.getApiById(sysApi.getId()), request);
+            sysHistoryService.addHistory(history);
+            sysApiMapper.editSysApi(sysApi);
+            return "编辑成功";
+
+        }catch (Exception e){
+            System.out.println(e);
+            return "编辑失败";
+
+        }
     }
 }

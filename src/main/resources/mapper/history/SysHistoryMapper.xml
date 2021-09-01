@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.mars_api.history.mapper.SysHistoryMapper">
+
+    <insert id="addHistory" parameterType="com.mars.mars_api.history.bean.SysHistory">
+        INSERT INTO sys_history(title, create_by, content, pid, create_time, is_leaf, og_content, update_time, update_user, api_id)
+        VALUES (#{title}, #{createBy}, #{content}, #{pid}, #{createTime}, #{isLeaf}, #{ogContent}, #{updateTime}, #{updateUser}, #{apiId})
+    </insert>
+
+
+</mapper>

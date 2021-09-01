@@ -225,11 +225,10 @@
                 console.log(ogContent)
 
                 $.ajax({
-                    url:"/sysApi/editSysApi",
+                    url:"/sysApi/saveSysApi",
                     type:"post",
                     contentType: 'application/json',
                     data:JSON.stringify({
-                        "id" : id,
                         "title" : title,
                         "pid" : pid,
                         "content" : content,
@@ -247,7 +246,7 @@
 
         //返回
         $("#returnBtn").click(function () {
-            location.href = "/mainPage"
+            window.history.go(-1);
         });
 
 
